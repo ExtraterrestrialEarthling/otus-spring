@@ -1,8 +1,10 @@
 package ru.haidarov.hw.dao.dto;
 
 import com.opencsv.bean.AbstractCsvConverter;
+import org.springframework.stereotype.Component;
 import ru.haidarov.hw.domain.Answer;
 
+@Component
 public class AnswerCsvConverter extends AbstractCsvConverter {
 
     @Override
