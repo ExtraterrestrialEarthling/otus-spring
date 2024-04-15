@@ -3,8 +3,6 @@ package ru.haidarov.hw;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.haidarov.hw.config.AppProperties;
 import ru.haidarov.hw.service.TestRunnerService;
 
 @ComponentScan
