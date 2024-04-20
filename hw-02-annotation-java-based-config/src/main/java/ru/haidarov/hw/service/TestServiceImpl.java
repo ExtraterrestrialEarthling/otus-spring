@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.haidarov.hw.config.AppSettingsProvider;
 import ru.haidarov.hw.dao.QuestionDao;
-import ru.haidarov.hw.dao.UserDao;
 import ru.haidarov.hw.domain.Question;
 import ru.haidarov.hw.domain.User;
 import ru.haidarov.hw.exceptions.InputReadException;
@@ -21,14 +20,11 @@ public class TestServiceImpl implements TestService {
 
     private final QuestionDao questionDao;
 
-    private final UserDao userDao;
-
     private int points;
 
     @Override
     public void executeTest() {
         User user = createUserFromInput();
-        userDao.save(user);
         points = 0;
         ioService.printFormattedLine("Please answer the questions below%n");
         List<Question> questions = questionDao.findAll();
