@@ -12,3 +12,6 @@ test:
   fileNameByLocaleTag:
     ru-RU: questions_ru.csv
     en-US: questions.csv
+#logging:
+#  level:
+#    ru.haidarov.hw: DEBUG
