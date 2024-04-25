@@ -1,4 +1,4 @@
-package ru.haidarov.hw.config;
+package ru.haidarov.hw.logging;
 
 import lombok.Getter;
 import lombok.Setter;
