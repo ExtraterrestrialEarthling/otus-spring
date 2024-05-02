@@ -1,0 +1,19 @@
+application:
+  title: TestAPP
+  version: 0.0.3
+spring:
+  messages:
+    baseName: messages
+    encoding: UTF-8
+    fallback-to-system-locale: false
+test:
+  rightAnswersCountToPass: 3
+  locale: ru-RU
+  fileNameByLocaleTag:
+    ru-RU: questions_ru.csv
+    en-US: questions.csv
+logging:
+  execution-time:
+    enabled: false
+  level:
+    ru.haidarov.hw: DEBUG
