@@ -1,6 +1,7 @@
 package ru.haidarov.hw.shell;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.shell.Availability;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -8,7 +9,6 @@ import org.springframework.shell.standard.ShellMethodAvailability;
 import org.springframework.shell.standard.ShellOption;
 import ru.haidarov.hw.config.LocaleConfig;
 import ru.haidarov.hw.config.SecretInfoAvailabilityChecker;
-import ru.haidarov.hw.service.TestRunnerService;
 
 @ShellComponent
 @RequiredArgsConstructor
@@ -16,16 +16,16 @@ public class TestAppCommands {
 
     private final LocaleConfig localeConfig;
 
-    private final TestRunnerService testRunnerService;
+    private final CommandLineRunner commandLineRunner;
 
     private final SecretInfoAvailabilityChecker secretInfoAvailabilityChecker;
 
     @ShellMethod("Run the app (and specify locale - optional)")
-    public void run(@ShellOption(defaultValue = "") String locale) {
+    public void run(@ShellOption(defaultValue = "") String locale) throws Exception {
         if (!locale.isEmpty()) {
             localeConfig.setLocale(locale);
         }
-        testRunnerService.run();
+        commandLineRunner.run();
     }
 
     @ShellMethod(value = "Author's info", key = {"info", "i", "cb"})
