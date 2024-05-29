@@ -74,6 +74,15 @@ class JdbcBookRepositoryTest {
                 .isEqualTo(returnedBook);
     }
 
+    @DisplayName("не должен добавлять более одной книги")
+    @Test
+    void shouldNotSaveMoreThanOneBook() {
+        int count = repositoryJdbc.findAll().size();
+        Book book = new Book(0, "title", dbAuthors.get(0), List.of(dbGenres.get(0)));
+        repositoryJdbc.save(book);
+        assertThat(repositoryJdbc.findAll().size()).isEqualTo(count+1);
+    }
+
     @DisplayName("должен сохранять измененную книгу")
     @Test
     void shouldSaveUpdatedBook() {
@@ -96,12 +105,33 @@ class JdbcBookRepositoryTest {
                 .isEqualTo(returnedBook);
     }
 
+    @DisplayName("не должен изменять другие книги")
+    @Test
+    void updateBookShouldNotAffectOtherBooks(){
+        List<Book> allBooksBefore = repositoryJdbc.findAll();
+        var bookToUpdate = repositoryJdbc.findById(1L).get();
+        allBooksBefore.remove(bookToUpdate);
+        bookToUpdate.setTitle("newTitle");
+        var updatedBook = repositoryJdbc.save(bookToUpdate);
+        List<Book> allBooksAfter = repositoryJdbc.findAll();
+        allBooksAfter.remove(updatedBook);
+        assertThat(allBooksAfter).containsExactlyElementsOf(allBooksBefore);
+    }
+
     @DisplayName("должен удалять книгу по id ")
     @Test
     void shouldDeleteBook() {
         assertThat(repositoryJdbc.findById(1L)).isPresent();
         repositoryJdbc.deleteById(1L);
         assertThat(repositoryJdbc.findById(1L)).isEmpty();
+    }
+
+    @DisplayName("не должен удалять другие книги")
+    @Test
+    void shouldNotDeleteOtherBooks() {
+        int initialCount = repositoryJdbc.findAll().size();
+        repositoryJdbc.deleteById(2L);
+        assertThat(repositoryJdbc.findAll().size()).isEqualTo(initialCount-1);
     }
 
     private static List<Author> getDbAuthors() {
