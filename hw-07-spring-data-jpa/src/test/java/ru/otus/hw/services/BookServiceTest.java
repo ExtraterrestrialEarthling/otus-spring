@@ -3,6 +3,7 @@ package ru.otus.hw.services;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
@@ -17,7 +18,6 @@ import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest(properties = {"spring.shell.interactive.enabled=false"})
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class BookServiceTest {
 
     @Autowired
@@ -33,6 +33,7 @@ public class BookServiceTest {
 
     private static final long NOT_EXISTING_ID = 999L;
 
+
     @BeforeEach
     void setUp() {
         dbAuthors = getDbAuthors();
@@ -42,7 +43,6 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("findAll должен возвращать правильную книгу")
-    @Order(1)
     void shouldReturnCorrectBookList(){
         List<Book> expectedBooks = dbBooks;
 
@@ -65,7 +65,6 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("findById должен возвращать правильную книгу")
-    @Order(2)
     void shouldReturnCorrectBook(){
         Book expectedBook = dbBooks.get(0);
         Optional<Book> actualBook = bookService.findById(1);
@@ -77,7 +76,7 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("insert должен правильно сохранять книгу")
-    @Order(3)
+    @DirtiesContext
     void shouldSaveBookCorrectly(){
         String bookTitle = "insertedBook";
         Book expectedBook = new Book(0, bookTitle, dbAuthors.get(0), List.of(dbGenres.get(0)));
@@ -97,7 +96,7 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("Должен корректно обновлять книгу")
-    @Order(4)
+    @DirtiesContext
     void shouldUpdateBookCorrectly(){
         Book expectedBook = dbBooks.get(2);
         expectedBook.setTitle("modified title");
@@ -119,7 +118,6 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("Метод update должен выбрасывать exception, если такой id не существует")
-    @Order(5)
     void updateShouldThrowExceptionIfIdDoesntExist(){
         Book bookForUpdate = dbBooks.get(2);
         bookForUpdate.setId(NOT_EXISTING_ID);
@@ -135,7 +133,7 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("Должен корректно удалять книгу")
-    @Order(6)
+    @DirtiesContext
     void shouldDeleteBookCorrectly(){
         bookService.deleteById(1L);
         Optional<Book> bookOptional = bookService.findById(1L);
@@ -144,12 +142,28 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("deleteById должен возвращать exception если id не существует")
-    @Order(7)
     void deleteBookShouldThrowExceptionIfIdDoesntExist(){
         assertThatExceptionOfType(EntityNotFoundException.class)
                 .isThrownBy(()-> bookService.deleteById(NOT_EXISTING_ID));
     }
 
+    @Test
+    @DisplayName("метод должен выбрасывать исключение при попытке" +
+            " добавить книгу с несуществующим жанром")
+    @DirtiesContext
+    void insertBookShouldThrowExceptionIfIncorrectGenre(){
+        assertThatExceptionOfType(EntityNotFoundException.class).isThrownBy(()->
+                bookService.insert("newBook", 1, Set.of(NOT_EXISTING_ID)));
+    }
+
+    @Test
+    @DisplayName("метод должен выбрасывать исключение при попытке" +
+            " добавить книгу с несуществующим жанром")
+    @DirtiesContext
+    void insertBookShouldThrowExceptionIfIncorrectAuthor(){
+        assertThatExceptionOfType(EntityNotFoundException.class).isThrownBy(()->
+                bookService.insert("newBook", NOT_EXISTING_ID, Set.of(1L)));
+    }
 
     private static List<Author> getDbAuthors() {
         return IntStream.range(1, 4).boxed()

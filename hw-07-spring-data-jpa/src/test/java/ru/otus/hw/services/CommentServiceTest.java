@@ -3,6 +3,7 @@ package ru.otus.hw.services;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
@@ -17,7 +18,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 @SpringBootTest(properties = {"spring.shell.interactive.enabled=false"})
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CommentServiceTest {
 
     @Autowired
@@ -40,7 +40,6 @@ public class CommentServiceTest {
 
     @Test
     @DisplayName("должен возвращать правильный список комментариев по bookId")
-    @Order(1)
     void shouldReturnCorrectCommentListByBookId(){
         Book book = dbBooks.get(0);
         List<Comment> comments = commentService.findByBookId(book.getId());
@@ -51,7 +50,6 @@ public class CommentServiceTest {
 
     @Test
     @DisplayName("должен возвращать правильный комментарий по id")
-    @Order(2)
     void shouldReturnCorrectCommentById(){
         Book book = dbBooks.get(0);
         long id = 1L;
@@ -62,7 +60,7 @@ public class CommentServiceTest {
 
     @Test
     @DisplayName("должен корректно добавлять новый комментарий")
-    @Order(3)
+    @DirtiesContext
     void shouldSaveNewComment(){
         Book book = dbBooks.get(1);
         long id = 5L;
@@ -74,7 +72,7 @@ public class CommentServiceTest {
 
     @Test
     @DisplayName("должен корректно обновлять комментарий по id")
-    @Order(4)
+    @DirtiesContext
     void shouldUpdateComment(){
         Book book = dbBooks.get(0);
         long commentId = 1L;
@@ -86,7 +84,7 @@ public class CommentServiceTest {
 
     @Test
     @DisplayName("должен удалять комментарий корректно")
-    @Order(5)
+    @DirtiesContext
     void shouldDeleteComment(){
         Comment commentForDeletion = commentService.findById(1).get();
         commentService.deleteById(commentForDeletion.getId());
@@ -95,7 +93,6 @@ public class CommentServiceTest {
 
     @Test
     @DisplayName("должен выбрасывать exception, если при обновлении комментария указан неверный id")
-    @Order(6)
     void updateShouldThrowExceptionIfIdDoesntExist() {
         assertThatExceptionOfType(EntityNotFoundException.class)
                 .isThrownBy(() -> commentService.update(NOT_EXISTING_ID, "doesn't matter"));

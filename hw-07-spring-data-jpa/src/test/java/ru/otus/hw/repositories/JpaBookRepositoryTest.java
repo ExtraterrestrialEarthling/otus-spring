@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.annotation.DirtiesContext;
 import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Genre;
@@ -17,7 +18,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Репозиторий на основе Jpa для работы с книгами ")
 @DataJpaTest
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class JpaBookRepositoryTest {
 
     @Autowired
@@ -45,7 +45,6 @@ class JpaBookRepositoryTest {
 
     @DisplayName("должен загружать список всех книг")
     @Test
-    @Order(1)
     void shouldReturnCorrectBooksList() {
         SessionFactory sessionFactory = em.getEntityManager()
                 .getEntityManagerFactory()
@@ -64,7 +63,6 @@ class JpaBookRepositoryTest {
 
     @Test
     @DisplayName("должен загружать книгу по id")
-    @Order(2)
     void shouldReturnCorrectBookById() {
         var actualBook = repositoryJpa.findById(1L);
         var expectedBook = em.find(Book.class, 1L);
@@ -72,9 +70,8 @@ class JpaBookRepositoryTest {
                 .usingRecursiveComparison().isEqualTo(expectedBook);
     }
 
-    @DisplayName("должен возращать пустой результат, если книга не найдена")
     @Test
-    @Order(3)
+    @DisplayName("должен возращать пустой результат, если книга не найдена")
     void shouldReturnEmptyOptionalIfBookDoesntExist(){
         Optional<Book> book = repositoryJpa.findById(124);
         assertThat(book).isEmpty();
@@ -82,7 +79,7 @@ class JpaBookRepositoryTest {
 
     @DisplayName("должен сохранять новую книгу")
     @Test
-    @Order(4)
+    @DirtiesContext
     void shouldSaveNewBook() {
         var expectedBook = new Book(0, "BookTitle_10500", dbAuthors.get(0),
                 List.of(dbGenres.get(0), dbGenres.get(2)));
@@ -99,7 +96,7 @@ class JpaBookRepositoryTest {
 
     @DisplayName("не должен добавлять более одной книги")
     @Test
-    @Order(5)
+    @DirtiesContext
     void shouldNotSaveMoreThanOneBook() {
         int count = repositoryJpa.findAll().size();
         Book book = new Book(0, "title", dbAuthors.get(0), List.of(dbGenres.get(0)));
@@ -109,7 +106,7 @@ class JpaBookRepositoryTest {
 
     @DisplayName("должен сохранять измененную книгу")
     @Test
-    @Order(6)
+    @DirtiesContext
     void shouldSaveUpdatedBook() {
         var expectedBook = new Book(1L, "BookTitle_10500", dbAuthors.get(2),
                 List.of(dbGenres.get(4), dbGenres.get(5)));
@@ -132,7 +129,7 @@ class JpaBookRepositoryTest {
 
     @DisplayName("не должен изменять другие книги")
     @Test
-    @Order(7)
+    @DirtiesContext
     void updateBookShouldNotAffectOtherBooks(){
         List<Book> allBooksBefore = repositoryJpa.findAll();
         var bookToUpdate = repositoryJpa.findById(1L).get();
@@ -146,7 +143,7 @@ class JpaBookRepositoryTest {
 
     @DisplayName("должен удалять книгу по id ")
     @Test
-    @Order(8)
+    @DirtiesContext
     void shouldDeleteBook() {
         assertThat(repositoryJpa.findById(3L)).isPresent();
         repositoryJpa.deleteById(3L);
@@ -155,7 +152,7 @@ class JpaBookRepositoryTest {
 
     @DisplayName("не должен удалять другие книги")
     @Test
-    @Order(9)
+    @DirtiesContext
     void shouldNotDeleteOtherBooks() {
         int initialCount = repositoryJpa.findAll().size();
         repositoryJpa.deleteById(2L);
