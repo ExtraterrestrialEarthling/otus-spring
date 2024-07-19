@@ -158,7 +158,7 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("метод должен выбрасывать исключение при попытке" +
-            " добавить книгу с несуществующим жанром")
+            " добавить книгу с несуществующим автором")
     @DirtiesContext
     void insertBookShouldThrowExceptionIfIncorrectAuthor(){
         assertThatExceptionOfType(EntityNotFoundException.class).isThrownBy(()->
