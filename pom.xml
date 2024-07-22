@@ -16,6 +16,7 @@
         <module>hw-04-spring-shell</module>
         <module>hw-05-jdbc</module>
         <module>hw-06-jpa</module>
+        <module>hw-07-spring-data-jpa</module>
     </modules>
     <properties>
         <java.version>17</java.version>
