@@ -2,10 +2,8 @@ package ru.otus.hw.repositories;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Comment;
@@ -16,7 +14,6 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@ExtendWith(SpringExtension.class)
 @DisplayName("Mongo репозиторий для работы с комментариями")
 @DataMongoTest
 public class MongoCommentRepositoryTest {
@@ -73,6 +70,4 @@ public class MongoCommentRepositoryTest {
         return new Book(null, "Interesting book", new Author(null, "Some author"),
                 List.of(new Genre(null, "some genre")));
     }
-
-
 }

@@ -2,17 +2,15 @@ package ru.otus.hw.services;
 
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
+import ru.otus.hw.config.TestMongoConfig;
 import ru.otus.hw.exceptions.EntityNotFoundException;
-import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
 import ru.otus.hw.models.Comment;
-import ru.otus.hw.models.Genre;
-import ru.otus.hw.repositories.AuthorRepository;
 import ru.otus.hw.repositories.BookRepository;
 import ru.otus.hw.repositories.CommentRepository;
-import ru.otus.hw.repositories.GenreRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +18,8 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-@SpringBootTest(properties = {"spring.shell.interactive.enabled=false"})
+@DataMongoTest
+@Import({CommentServiceImpl.class, TestMongoConfig.class})
 public class CommentServiceTest {
 
     @Autowired
@@ -30,18 +29,7 @@ public class CommentServiceTest {
     private BookRepository bookRepository;
 
     @Autowired
-    private GenreRepository genreRepository;
-
-    @Autowired
-    private AuthorRepository authorRepository;
-
-    @Autowired
     private CommentRepository commentRepository;
-
-
-    private List<Author> dbAuthors;
-
-    private List<Genre> dbGenres;
 
     private List<Book> dbBooks;
 
@@ -51,8 +39,6 @@ public class CommentServiceTest {
 
     @BeforeEach
     void setUp() {
-        dbAuthors = authorRepository.findAll();
-        dbGenres = genreRepository.findAll();
         dbBooks = bookRepository.findAll();
         dbComments = commentRepository.findAll();
     }

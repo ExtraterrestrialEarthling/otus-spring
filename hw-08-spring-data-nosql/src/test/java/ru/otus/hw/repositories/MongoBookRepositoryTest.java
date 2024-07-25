@@ -40,7 +40,7 @@ public class MongoBookRepositoryTest {
         Book newBook = new Book();
         newBook.setTitle("New Book");
         newBook.setAuthor(new Author("Jane", "Doe"));
-        newBook.setGenres(Arrays.asList(new Genre(null, "Science Fiction")));
+        newBook.setGenres(List.of(new Genre(null, "Science Fiction")));
 
         Book savedBook = bookRepository.save(newBook);
 

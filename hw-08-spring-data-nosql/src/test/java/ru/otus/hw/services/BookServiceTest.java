@@ -2,8 +2,10 @@ package ru.otus.hw.services;
 
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
+import ru.otus.hw.config.TestMongoConfig;
 import ru.otus.hw.exceptions.EntityNotFoundException;
 import ru.otus.hw.models.Author;
 import ru.otus.hw.models.Book;
@@ -19,7 +21,8 @@ import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
 
-@SpringBootTest(properties = {"spring.shell.interactive.enabled=false"})
+@DataMongoTest
+@Import({BookServiceImpl.class, TestMongoConfig.class})
 public class BookServiceTest {
 
     @Autowired

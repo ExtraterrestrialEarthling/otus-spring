@@ -1,10 +1,7 @@
 spring:
   data:
     mongodb:
-      port: 27017
-      host: localhost
-
-
+      port: 0
 
 de:
   flapdoodle:
@@ -17,3 +14,7 @@ mongock:
   change-logs-scan-package:
     - ru.otus.hw.mongock.changelog
 
+  mongo-db:
+    write-concern:
+      journal: false
+    read-concern: local
