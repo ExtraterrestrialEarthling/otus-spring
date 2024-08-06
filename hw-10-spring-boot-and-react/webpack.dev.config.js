@@ -17,6 +17,13 @@ module.exports = {
         host: 'localhost',
         open: true,
         historyApiFallback: true,
+        proxy: {
+            '/api': {
+                target: 'http://localhost:8080',
+                changeOrigin: true,
+                secure: false
+            }
+        }
     },
 
     module: {

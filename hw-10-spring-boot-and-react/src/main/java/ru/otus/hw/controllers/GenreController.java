@@ -19,7 +19,6 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/genres")
-@CrossOrigin(origins = "http://localhost:9000")
 public class GenreController {
 
     private final GenreService genreService;
