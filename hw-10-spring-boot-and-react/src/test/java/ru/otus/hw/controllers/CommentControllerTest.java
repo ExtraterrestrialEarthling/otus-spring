@@ -37,7 +37,8 @@ public class CommentControllerTest {
     @Test
     public void testFindByBookId() throws Exception {
         String expectedJson = om.writeValueAsString(getTestComments());
-        var result = mockMvc.perform(get("/api/comments/1"))
+        var result = mockMvc.perform(get("/api/comments")
+                        .param("bookId", "1"))
                 .andExpect(status().isOk())
                 .andReturn();
 
