@@ -19,6 +19,7 @@
         <module>hw-07-spring-data-jpa</module>
         <module>hw-08-spring-data-nosql</module>
         <module>hw-09-spring-mvc</module>
+        <module>hw-10-spring-boot-and-react</module>
     </modules>
     <properties>
         <java.version>17</java.version>

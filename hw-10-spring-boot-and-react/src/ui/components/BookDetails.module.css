@@ -1,0 +1,193 @@
+.bookDetails {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    margin: 40px auto;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.bookDetails:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.headerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 100%;
+    position: relative;
+}
+
+.headerContainer::before,
+.headerContainer::after {
+    content: '';
+    flex: 1;
+}
+
+.title {
+    margin-top: 25px;
+    color: #4b6cb7;
+    font-size: 28px;
+    text-align: center;
+    font-weight: 500;
+    z-index: 1;
+}
+
+.backButton {
+    padding: 12px 25px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #4b6cb7;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+}
+
+.backButton:hover {
+    background-color: #354a77;
+    transform: translateY(-2px);
+}
+
+.deleteButton {
+    padding: 12px 25px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #e53935;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+}
+
+.deleteButton:hover {
+    background-color: #c62828;
+    transform: translateY(-2px);
+}
+
+.detail {
+    font-size: 18px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.loaderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top: 4px solid #4b6cb7;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.commentsSection {
+    margin-top: 30px;
+}
+
+.commentsHeader {
+    font-size: 24px;
+    color: #4b6cb7;
+    margin-bottom: 15px;
+}
+
+.commentsList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comment {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.commentForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.commentInput {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    background-color: #fff;
+    resize: vertical;
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.editButton {
+    padding: 12px 25px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #4b6cb7;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    position: absolute;
+    right: 140px;
+}
+
+.editButton:hover {
+    background-color: #354a77;
+    transform: translateY(-2px);
+}
+
+
+.commentButton {
+    padding: 12px 25px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #4b6cb7;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.commentButton:hover {
+    background-color: #354a77;
+    transform: translateY(-2px);
+}

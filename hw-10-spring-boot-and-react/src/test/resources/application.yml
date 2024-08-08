@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: spring-boot-and-react
+  datasource:
+    url: jdbc:h2:mem:testdb
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:data-test.sql
+
+
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+
+    show-sql: true
+    open-in-view: false
+
+logging:
+  level:
+    ROOT: ERROR
