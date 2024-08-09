@@ -1,0 +1,22 @@
+.header {
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    color: #fff;
+    padding: 20px 40px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.header:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 1px;
+}
