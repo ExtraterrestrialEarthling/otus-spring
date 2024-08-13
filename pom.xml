@@ -21,6 +21,7 @@
         <module>hw-09-spring-mvc</module>
         <module>hw-10-spring-boot-and-react</module>
         <module>hw-11-webflux</module>
+        <module>hw-12-security</module>
     </modules>
     <properties>
         <java.version>17</java.version>

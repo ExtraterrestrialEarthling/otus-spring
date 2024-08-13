@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Confirm Delete</title>
+  <style type="text/css">
+    body {
+      font-family: Arial, sans-serif;
+      padding: 50px;
+      background-color: #f0f0f0;
+    }
+
+    .confirm-delete {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    .confirm-delete p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .confirm-button,
+    .cancel-button {
+      padding: 10px 15px;
+      font-size: 14px;
+      color: #fff;
+      background-color: steelblue;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .confirm-button:hover,
+    .cancel-button:hover {
+      background-color: darkblue;
+    }
+
+    .confirm-button {
+      background-color: crimson;
+    }
+
+    .confirm-button:hover {
+      background-color: darkred;
+    }
+  </style>
+</head>
+<body>
+<div class="confirm-delete">
+  <p>Are you sure you want to delete the book titled "<span th:text="${book.title}">Book Title</span>"?</p>
+  <div class="button-container">
+    <form th:action="@{/books/delete/{id}(id=${book.id})}" method="post">
+      <button type="submit" class="confirm-button">Yes, delete</button>
+    </form>
+    <form th:action="@{/books/details/{id}(id=${book.id})}" method="get">
+      <button type="submit" class="cancel-button">Cancel</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
