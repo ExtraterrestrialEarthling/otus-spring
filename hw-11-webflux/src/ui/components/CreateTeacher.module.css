@@ -1,0 +1,121 @@
+.body {
+    font-family: 'Roboto', sans-serif;
+    padding: 50px;
+    background-color: #e0e0e0;
+    margin: 0;
+}
+
+.formContainer {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    margin: 40px auto;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.formContainer:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.headerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 100%;
+    position: relative;
+}
+
+.header {
+    margin: 0;
+    color: #4b6cb7;
+    font-size: 28px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.backButton {
+    padding: 12px 25px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #4b6cb7;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    position: absolute;
+    left: 0px;
+}
+
+.backButton:hover {
+    background-color: #354a77;
+    transform: translateY(-2px);
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+.label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.inputText {
+    width: calc(100% - 22px);
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.submitButton {
+    padding: 12px 25px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #4b6cb7;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: block; /* Ensures block-level behavior */
+    margin: 20px auto; /* Centers the button horizontally */
+}
+
+.submitButton:hover {
+    background-color: #354a77;
+    transform: translateY(-2px);
+}
+
+.successMessage {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.errorMessage {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-align: center;
+}
