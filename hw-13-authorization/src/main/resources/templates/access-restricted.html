@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Access Restricted</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+            background-color: #f0f0f0;
+        }
+
+        .restricted-page {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .restricted-page h3 {
+            margin-top: 0;
+            color: steelblue;
+            font-size: 24px;
+        }
+
+        .restricted-page p {
+            color: #333;
+            font-size: 18px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        .back-to-list {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: steelblue;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+
+        .back-to-list:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+<div class="restricted-page">
+    <h3>Access Restricted</h3>
+    <p>You do not have permission to view this page.</p>
+    <a class="back-to-list" th:href="@{/books}">Back to Book List</a>
+</div>
+</body>
+</html>

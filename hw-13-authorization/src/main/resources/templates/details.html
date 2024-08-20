@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Book Details</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+            background-color: #f0f0f0;
+        }
+
+        .book-details {
+            position: relative;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .book-details h3 {
+            margin-top: 0;
+            color: steelblue;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .book-details p {
+            margin: 0 0 10px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .book-details h4 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: steelblue;
+        }
+
+        .book-details ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 0 10px;
+        }
+
+        .book-details ul li {
+            margin-bottom: 5px;
+            font-size: 14px;
+            padding: 5px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+        .back-button-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .button-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .back-button,
+        .edit-button,
+        .delete-button,
+        .add-comment-button {
+            padding: 10px 15px;
+            font-size: 14px;
+            color: #fff;
+            background-color: steelblue;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover,
+        .edit-button:hover,
+        .delete-button:hover,
+        .add-comment-button:hover {
+            background-color: darkblue;
+        }
+
+        .delete-button {
+            background-color: crimson;
+        }
+
+        .delete-button:hover {
+            background-color: darkred;
+        }
+
+        .comment-input {
+            width: calc(100% - 110px);
+            padding: 10px;
+            font-size: 14px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .comment-form {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .error-messages {
+            color: crimson;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        .error-messages ul {
+            padding-left: 20px;
+        }
+
+        .error-messages li {
+            list-style-type: disc;
+        }
+    </style>
+</head>
+<body>
+<div class="book-details">
+    <div class="back-button-container">
+        <form th:action="@{/books}" method="get">
+            <button type="submit" class="back-button">Back</button>
+        </form>
+    </div>
+
+    <div class="button-container">
+        <form th:action="@{/books/edit/{id}(id=${book.id})}" method="get">
+            <button type="submit" class="edit-button">Edit</button>
+        </form>
+
+        <form th:action="@{/books/confirm-delete/{id}(id=${book.id})}" method="get">
+            <button type="submit" class="delete-button">Delete</button>
+        </form>
+    </div>
+    <h3>Book Details:</h3>
+
+    <h4>General information:</h4>
+    <p><strong>Title:</strong> <span th:text="${book.title}">Harry Potter</span></p>
+    <p><strong>Author:</strong> <span th:text="${book.author.fullName}">J.K. Rowling</span></p>
+
+    <h4>Genres:</h4>
+    <ul>
+        <li th:each="genre : ${book.genres}" th:text="${genre.name}">Genre placeholder</li>
+    </ul>
+
+    <h4>Comments:</h4>
+    <ul>
+        <li th:each="comment : ${comments}" th:text="${comment.text}">Comment placeholder</li>
+    </ul>
+
+    <form class="comment-form" th:action="@{/books/{bookId}/comments(bookId=${book.id})}" method="post">
+        <input type="text" class="comment-input" name="text" placeholder="Add a comment...">
+        <button type="submit" class="add-comment-button">Add comment</button>
+    </form>
+    <div class="error-messages" th:if="${errors}">
+        <ul>
+            <li th:each="error : ${errors}" th:text="${error.defaultMessage}">Error message placeholder</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
