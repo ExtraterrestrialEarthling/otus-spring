@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Book</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+            background-color: #f0f0f0;
+        }
+
+        .edit-book-form {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .edit-book-form h3 {
+            margin-top: 0;
+            color: steelblue;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .edit-book-form .row {
+            margin-bottom: 15px;
+        }
+
+        .edit-book-form label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .edit-book-form input[type="text"],
+        .edit-book-form input[type="hidden"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .edit-book-form .genre-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .edit-book-form .genre-list label {
+            display: inline-block;
+            font-size: 14px;
+            padding: 5px;
+            background-color: #e0e0e0;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .edit-book-form .genre-list input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .edit-book-form button[type="submit"] {
+            padding: 10px 15px;
+            font-size: 14px;
+            color: #fff;
+            background-color: steelblue;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .edit-book-form button[type="submit"]:hover {
+            background-color: darkblue;
+        }
+
+        .edit-book-form .error-messages {
+            color: crimson;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        .edit-book-form .error-messages ul {
+            padding-left: 20px;
+        }
+
+        .edit-book-form .error-messages li {
+            list-style-type: disc;
+        }
+    </style>
+</head>
+<body>
+<div class="edit-book-form">
+    <h3>Edit Book</h3>
+    <form action="/books/edit" method="post">
+        <div class="row" style="display:none;">
+            <label for="book-id-input">Book ID:</label>
+            <input id="book-id-input" type="hidden" name="bookId" th:value="${book.id}"/>
+        </div>
+        <div class="row">
+            <label for="book-title-input">Title:</label>
+            <input id="book-title-input" name="title" type="text" th:value="${book.title}"/>
+        </div>
+        <div class="row" style="display:none;">
+            <label for="author-id-input">Author ID:</label>
+            <input id="author-id-input" type="hidden" name="authorId" th:value="${book.author.id}"/>
+        </div>
+        <div class="row">
+            <label for="author-input">Author:</label>
+            <input id="author-input" name="authorFullName" type="text" th:value="${book.author.fullName}"/>
+        </div>
+        <div class="row">
+            <label>Select Genres:</label>
+            <div class="genre-list" id="book-genres">
+                <div th:each="genre : ${genres}">
+                    <label>
+                        <input type="checkbox" name="genreIds" th:value="${genre.id}" th:checked="${book.genres.contains(genre)}"/>
+                        <span th:text="${genre.name}">Genre placeholder</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label>
+                <input type="checkbox" name="adultOnly" th:checked="${book.adultOnly}"/>
+                Adult Only
+            </label>
+        </div>
+        <div class="row">
+            <button type="submit">Save Book</button>
+        </div>
+
+        <div class="error-messages" th:if="${errors}">
+            <ul>
+                <li th:each="error : ${errors}" th:text="${error.defaultMessage}">Error message placeholder</li>
+            </ul>
+        </div>
+    </form>
+</div>
+</body>
+</html>

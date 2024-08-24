@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of All Books</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+
+        .book-list {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .book-list h3 {
+            margin-top: 0;
+            color: steelblue;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .books {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .books th, .books td {
+            padding: 10px;
+            border: 1px solid steelblue;
+            text-align: left;
+        }
+
+        .books th {
+            background-color: steelblue;
+            color: #fff;
+        }
+
+        .books tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .books td:last-child {
+            text-align: center;
+        }
+
+        .view-details,
+        .create-book {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: steelblue;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+
+        .view-details:hover,
+        .create-book:hover {
+            background-color: darkblue;
+        }
+
+        .logout {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: red;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            position: absolute;
+            top: 20px;
+            right: 50px;
+        }
+
+        .logout:hover {
+            background-color: darkred;
+        }
+
+        .create-book-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<a class="logout" th:href="@{/logout}">Logout</a>
+<div class="book-list">
+    <h3>Books:</h3>
+    <table class="books">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.id}">1</td>
+            <td th:text="${book.title}">Harry Potter</td>
+            <td th:text="${book.author.fullName}">J.K. Rowling</td>
+            <td>
+                <a class="view-details" th:href="@{books/details/{id}(id=${book.id})}">View details</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="create-book-container">
+        <a class="create-book" th:href="@{/books/create}">Create Book</a>
+    </div>
+    <div class="create-book-container">
+        <a class="logout" th:href="@{/logout}">Logout</a>
+    </div>
+</div>
+</body>
+</html>
