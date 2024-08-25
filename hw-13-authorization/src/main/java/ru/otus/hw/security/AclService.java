@@ -1,4 +1,4 @@
-package ru.otus.hw.services;
+package ru.otus.hw.security;
 
 import org.springframework.security.acls.model.MutableAcl;
 import ru.otus.hw.models.Book;

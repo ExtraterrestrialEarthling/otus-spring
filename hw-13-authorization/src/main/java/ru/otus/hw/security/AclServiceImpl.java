@@ -1,4 +1,4 @@
-package ru.otus.hw.services;
+package ru.otus.hw.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.acls.domain.BasePermission;
