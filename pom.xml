@@ -25,6 +25,7 @@
         <module>hw-13-authorization</module>
         <module>hw-14-spring-batch</module>
         <module>hw-15-spring-integration</module>
+        <module>hw-16-actuator</module>
     </modules>
     <properties>
         <java.version>17</java.version>
