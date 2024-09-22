@@ -1,0 +1,132 @@
+/* General styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 28px;
+  color: #34495e;
+}
+
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Accordion styling */
+.accordion {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.accordion-header {
+  padding: 15px;
+  background-color: #0073e6;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px 8px 0 0;
+}
+
+.accordion-header:hover {
+  background-color: #005bb5;
+}
+
+.accordion-content {
+  display: none;
+  padding: 15px;
+  border-top: 1px solid #ccc;
+  border-radius: 0 0 8px 8px;
+}
+
+.accordion-content.active {
+  display: block;
+}
+
+/* Car List styling */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.car-info {
+  flex-grow: 1;
+}
+
+.car-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+input[type="number"] {
+  width: 80px;
+  padding: 6px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.car-actions div {
+  font-size: 14px;
+  color: #555;
+}
+
+button {
+  padding: 6px 12px;
+  background-color: #4caf50; /* More neutral color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+@media (max-width: 600px) {
+  input[type="number"] {
+    width: 100px;
+  }
+
+  li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}

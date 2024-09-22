@@ -26,11 +26,17 @@
         <module>hw-14-spring-batch</module>
         <module>hw-15-spring-integration</module>
         <module>hw-16-actuator</module>
+        <module>hw-17/library-api</module>
+        <module>hw-18/car-service</module>
+        <module>hw-18/payment-service</module>
+        <module>hw-18/rental-service</module>
+        <module>hw-18/config-server</module>
+        <module>hw-18/eureka-discovery-server</module>
+        <module>hw-18/service-gateway</module>
     </modules>
     <properties>
         <java.version>17</java.version>
     </properties>
-
 
 </project>
 
