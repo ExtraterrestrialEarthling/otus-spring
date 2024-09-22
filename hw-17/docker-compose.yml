@@ -1,0 +1,28 @@
+services:
+  backend:
+    build:
+      context: library-api
+      dockerfile: Dockerfile
+    image: library-api
+    container_name: backend
+    networks:
+      - library_network
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build:
+      context: library-ui
+      dockerfile: Dockerfile
+    image: library-ui
+    container_name: frontend
+    networks:
+      - library_network
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+networks:
+  library_network:
+    driver: bridge
